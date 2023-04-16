@@ -13,7 +13,10 @@ import { UserListComponent } from './resources/user/user-list.component'
 
 import Bugsnag from '@bugsnag/js'
 import { BugsnagErrorHandler } from '@bugsnag/plugin-angular'
-import { CaseModule } from '@casejs/angular-library'
+import { CaseModule } from '@casejs/angular-library';
+import { PostulantCreateEditComponent } from './resources/postulant/postulant-create-edit/postulant-create-edit.component';
+import { PostulantListComponent } from './resources/postulant/postulant-list/postulant-list.component';
+import { PostulantDetailComponent } from './resources/postulant/postulant-detail/postulant-detail.component'
 
 if (environment.enableBugsnag) {
   Bugsnag.start({
@@ -32,7 +35,10 @@ export function errorHandlerFactory() {
     AppComponent,
     HomeComponent,
     UserListComponent,
-    UserCreateEditComponent
+    UserCreateEditComponent,
+    PostulantCreateEditComponent,
+    PostulantListComponent,
+    PostulantDetailComponent
   ],
   imports: [
     BrowserModule,

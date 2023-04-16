@@ -1,3 +1,4 @@
+import { PostulantModule } from './resources/postulant/postulant.module'
 import Bugsnag from '@bugsnag/js'
 import { CaseCoreModule, PermissionGuard } from '@casejs/nest-library'
 import { MiddlewareConsumer, Module } from '@nestjs/common'
@@ -25,7 +26,8 @@ if (process.env.ENABLE_BUGSNAG === 'true') {
 @Module({
   imports: [
     TypeOrmModule.forRoot(appConnectionOptions),
-    CaseCoreModule.forRoot({
+    PostulantModule,
+CaseCoreModule.forRoot({
       userEntity: UserLite,
       notificationEntity: Notification,
       permissionEntity: Permission,

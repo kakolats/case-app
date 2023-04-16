@@ -1,3 +1,4 @@
+import { Postulant } from './../resources/postulant/postulant.entity'
 import { SearchResult } from '@casejs/nest-library'
 import { Injectable } from '@nestjs/common'
 import {
@@ -29,6 +30,14 @@ export class SearchService {
     }
 
     // * Search resources (keep comment for schematics).
+if (
+        resources.includes(Postulant.name) &&
+        Postulant.searchableFields &&
+        Postulant.searchableFields.length
+      ) {
+        const postulants: SearchResult[] = await this.searchResource(Postulant, terms)
+        searchResults = [...searchResults, ...postulants]
+      }
     if (
       resources.includes(User.name) &&
       User.searchableFields &&
@@ -57,6 +66,13 @@ export class SearchService {
     let searchResults: SearchResult[] = []
 
     // * Get search result objects (keep comment for schematics).
+if (query.postulantIds && query.postulantIds.length || query.postulantId) {
+        const postulants: SearchResult[] = await this.getSearchResultObjectsForResource(
+          Postulant,
+          query.postulantIds || query.postulantId
+        )
+        searchResults = [...searchResults, ...postulants]
+      }
     if (query.userIds && query.userIds.length) {
       const users: SearchResult[] =
         await this.getSearchResultObjectsForResource(User, query.userIds)

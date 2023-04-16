@@ -1,5 +1,7 @@
 const resourceNames: string[] = [
   // * Resources (keep comment for schematics).
+  'postulants',
+
   'users',
   'roles',
   'settings'
