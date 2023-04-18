@@ -19,7 +19,6 @@ export const postulantRoutes: Route[] = [
   {
     path: 'postulants/create',
     component: PostulantCreateEditComponent,
-    canActivate: [AuthGuard, PermissionGuard],
     data: {
       mode: ResourceMode.Create,
       permission: 'addPostulants'

@@ -1,0 +1,61 @@
+<div class="container">
+    <section>
+        
+    </section>
+    <section>
+        <form [formGroup]="form" *ngIf="form">
+            <div class="card p-4">
+            <!-- Fields -->
+                <div class="columns is-multiline is-align-items-flex-end">
+                    <ng-container *ngFor="let field of resolvedFields">
+                            <div
+                            class="column is-flex is-align-items-flex-end {{ field.className || 'is-6' }}"
+                            [id]="field.id"
+                            *ngIf="!field.hidden"
+                            >
+                                <case-input
+                                    [type]="field.inputType"
+                                    [label]="field.label"
+                                    [placeholder]="field.placeholder"
+                                    [secondPlaceholder]="field.secondPlaceholder"
+                                    [initialValue]="field.initialValue"
+                                    [searchResources]="field.searchResources"
+                                    [resourceName]="definition.slug"
+                                    [searchParams]="field.searchParams" 
+                                    [maxSelectedItems]="field.maxSelectedItems" 
+                                    [selectOptions]="field.selectOptions" 
+                                    [min]="field.min" 
+                                    [max]="field.max" 
+                                    [copyDateFromOnDateTo]="field.copyDateFromOnDateTo" 
+                                    [readonly]="field.readonly" 
+                                    [validators]="field.validators" 
+                                    [helpText]="field.helpText" 
+                                    [showErrors]="showErrors" (valueChanged)="onValueChanged($event, field)">
+                                </case-input> 
+                            </div>
+                    </ng-container> 
+                </div> 
+            </div> 
+        </form>
+        
+        <div class="is-flex is-justify-content-space-between is-align-items-center mb-5">
+            <div class="right-part">
+            <button
+                class="button is-link is-hidden-touch"
+                (click)="submit()"
+                [ngClass]="{ 'is-loading': loading }"
+            >
+                Save
+            </button>
+            <button
+                class="button is-link is-rounded is-hidden-desktop"
+                (click)="submit()"
+                [ngClass]="{ 'is-loading': loading }"
+            >
+                <i class="icon icon-save"></i>
+            </button>
+            </div>
+        </div>
+    </section>
+    <br>
+    </div>

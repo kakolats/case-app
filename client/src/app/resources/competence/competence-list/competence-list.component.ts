@@ -15,25 +15,20 @@ import {
 } from '@casejs/angular-library'
 
 import { environment } from '../../../../environments/environment'
-import { postulantDefinition } from '../postulant.definition'
+import { competenceDefinition } from '../competence.definition'
 
 @Component({ template: caseListTemplate })
-export class PostulantListComponent extends CaseListComponent implements OnInit {
+export class CompetenceListComponent extends CaseListComponent implements OnInit {
   
   // Remove this property to hide onboarding message.
   isOnboarding = environment.isOnboarding
 
-  definition: ResourceDefinition = postulantDefinition
+  definition: ResourceDefinition = competenceDefinition
   yields: Yield[] = [
     {
-        label: 'nom',
-        property: 'name',
+        label: 'libelle',
+        property: 'libelle',
         type: YieldType.Text
-    },
-    {
-      label: 'prenom',
-      property: 'prenom',
-      type: YieldType.Text
     },
   ]
 

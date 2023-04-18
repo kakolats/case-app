@@ -1,3 +1,4 @@
+import { CompetenceModule } from './resources/competence/competence.module'
 import { PostulantModule } from './resources/postulant/postulant.module'
 import Bugsnag from '@bugsnag/js'
 import { CaseCoreModule, PermissionGuard } from '@casejs/nest-library'
@@ -27,6 +28,7 @@ if (process.env.ENABLE_BUGSNAG === 'true') {
   imports: [
     TypeOrmModule.forRoot(appConnectionOptions),
     PostulantModule,
+CompetenceModule,
 CaseCoreModule.forRoot({
       userEntity: UserLite,
       notificationEntity: Notification,

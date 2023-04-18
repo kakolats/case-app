@@ -16,7 +16,13 @@ import { BugsnagErrorHandler } from '@bugsnag/plugin-angular'
 import { CaseModule } from '@casejs/angular-library';
 import { PostulantCreateEditComponent } from './resources/postulant/postulant-create-edit/postulant-create-edit.component';
 import { PostulantListComponent } from './resources/postulant/postulant-list/postulant-list.component';
-import { PostulantDetailComponent } from './resources/postulant/postulant-detail/postulant-detail.component'
+import { PostulantDetailComponent } from './resources/postulant/postulant-detail/postulant-detail.component';
+import { CandidatureComponent } from './pages/candidature/candidature.component';
+import { DefaultLayoutComponent } from './default-layout/default-layout.component';
+import { CompetenceCreateEditComponent } from './resources/competence/competence-create-edit/competence-create-edit.component';
+import { CompetenceListComponent } from './resources/competence/competence-list/competence-list.component';
+import { CompetenceDetailComponent } from './resources/competence/competence-detail/competence-detail.component'
+
 
 if (environment.enableBugsnag) {
   Bugsnag.start({
@@ -38,7 +44,12 @@ export function errorHandlerFactory() {
     UserCreateEditComponent,
     PostulantCreateEditComponent,
     PostulantListComponent,
-    PostulantDetailComponent
+    PostulantDetailComponent,
+    CandidatureComponent,
+    DefaultLayoutComponent,
+    CompetenceCreateEditComponent,
+    CompetenceListComponent,
+    CompetenceDetailComponent
   ],
   imports: [
     BrowserModule,

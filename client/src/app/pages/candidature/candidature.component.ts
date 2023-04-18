@@ -1,41 +1,30 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup } from '@angular/forms'
 
 import { CaseCreateEditComponent, ResourceDefinition, Field, InputType, BreadcrumbService, FlashMessageService, ResourceService, caseCreateEditTemplate } from '@casejs/angular-library'
-
-import { environment } from '../../../../environments/environment'
-import { postulantDefinition } from '../postulant.definition'
-import { CompetenceService } from 'src/app/services/competence.service'
-import { Competence } from 'src/app/models/competence'
-import { Option } from 'src/app/models/option'
+import { postulantDefinition } from '../../resources/postulant/postulant.definition';
+import { environment } from 'src/environments/environment';
 
 
-export enum Sexe {
-  Homme = "Masculin",
-  Femme = "Feminin"
-}
-
-@Component({ template: caseCreateEditTemplate })
-export class PostulantCreateEditComponent extends CaseCreateEditComponent implements OnInit {
-  items: {
-    label:string,
-    value:number
-  };
-  competences:Option[]|[]=[];
-  // Remove this property to hide onboarding message.
+@Component({
+  selector: 'app-candidature',
+  templateUrl: './candidature.component.html',
+  styleUrls: ['./candidature.component.scss']
+})
+export class CandidatureComponent extends CaseCreateEditComponent implements OnInit {
   isOnboarding = environment.isOnboarding
   val:FormGroup = new FormGroup({})
   definition: ResourceDefinition = postulantDefinition
   fields: Field[] = [
     {
-      label: 'nom',
+      label: 'Nom',
       property: 'name',
       required: true,
       inputType: InputType.Text
     },
     {
-      label: 'prenom',
+      label: 'Prenom',
       property: 'prenom',
       required: true,
       inputType: InputType.Text
@@ -44,7 +33,7 @@ export class PostulantCreateEditComponent extends CaseCreateEditComponent implem
       label: 'Age',
       property: 'age',
       required: true,
-      inputType: InputType.Number,
+      inputType: InputType.Number
     },
     {
       label: 'Sexe',
@@ -53,11 +42,11 @@ export class PostulantCreateEditComponent extends CaseCreateEditComponent implem
       selectOptions: [
         {
           label : 'Masculin',
-          value : Sexe.Homme
+          value : 'Masculin'
         },
         {
           label : 'Feminin',
-          value : Sexe.Femme
+          value : 'Feminin'
         }
       ],
       inputType: InputType.Radio
@@ -81,19 +70,24 @@ export class PostulantCreateEditComponent extends CaseCreateEditComponent implem
       inputType: InputType.Text
     },
     {
-      label: 'Competences',
-      property: 'competences',
-      required: false,
-      selectOptions: [
-        
-      ],
-      inputType: InputType.MultiSelect
-    },
-    {
       label: 'Github',
       property: 'github',
       required: false,
       inputType: InputType.Text
+    },
+    {
+      label: 'Compétences',
+      property: 'competences',
+      selectOptions: [{
+        label: 'Label 1',
+        value: 'Value 1',
+      }, {
+        label: 'Label 2',
+        value: 'Value 2'
+      }
+      ],
+      required: true,
+      inputType: InputType.MultiSelect
     },
     {
       label: 'Photo',
@@ -107,6 +101,7 @@ export class PostulantCreateEditComponent extends CaseCreateEditComponent implem
       required: false,
       inputType: InputType.File
     },
+    
   ]
 
   constructor(
@@ -115,8 +110,7 @@ export class PostulantCreateEditComponent extends CaseCreateEditComponent implem
     activatedRoute: ActivatedRoute,
     resourceService: ResourceService,
     breadcrumbService: BreadcrumbService,
-    flashMessageService: FlashMessageService,
-    private competenceService:CompetenceService
+    flashMessageService: FlashMessageService
   ) {
     super(
       formBuilder,
@@ -124,35 +118,12 @@ export class PostulantCreateEditComponent extends CaseCreateEditComponent implem
       breadcrumbService,
       resourceService,
       flashMessageService,
-      activatedRoute
+      activatedRoute,
     )
   }
 
   ngOnInit() {
-    //console.log(this.competenceService.getCompetences())
-    /* this.competenceService.getCompetences().subscribe(data=>{
-      this.competences = data['data'].map((comp)=>({
-        label: comp.libelle,
-        value: comp.id
-      }));
-      this.fields.concat(
-        {
-          label: 'Competences',
-          property: 'competences',
-          required: true,
-          selectOptions: this.competences,
-          inputType: InputType.MultiSelect
-        },
-      )
-    }) */
-    this.competenceService.getSelectOptions().subscribe(data=>{
-      console.log(data);
-      this.fields[7].selectOptions=data;
-      console.log(this.fields);
-    })
-    this.initCreateEditView()
-    /* .then((data)=>{
-      //this.initCreateEditView()
+    this.initCreateEditView().then((data)=>{
       //console.log(data)
       this.val=data
       data.valueChanges.subscribe((dat)=>{
@@ -161,7 +132,8 @@ export class PostulantCreateEditComponent extends CaseCreateEditComponent implem
           console.log("Zehahahha")
         }
       })
-    }) */
+    })
+    console.log(this.fields[3])
     /* this.submitSuccessful.subscribe(()=>{
       console.log('Done');
     }) */
