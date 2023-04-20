@@ -1,12 +1,15 @@
 import { CaseProperty } from '@casejs/nest-library'
 import { faker } from '@faker-js/faker'
 import { Competence } from 'resources/competence/competence.entity'
+import { Langue } from 'resources/langue/langue.entity'
+import { Niveau } from 'resources/niveau/niveau.entity'
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn
@@ -80,10 +83,6 @@ export class Postulant {
   @Column({
     nullable: true
   })
-  @CaseProperty({
-    seed: (index: number) => faker.address.country()
-  })
-  langues: string
 
   @Column()
   @CaseProperty({
@@ -99,9 +98,22 @@ export class Postulant {
   })
   photo: string
 
+  @Column({
+    nullable:true
+  })
+  @CaseProperty({
+    seed: (index: number) => faker.image.avatar()
+  })
+  cv: string
+
 
   @ManyToMany(()=> Competence)
   @JoinTable()
   competences: Competence[]
 
+  @ManyToOne(()=>Niveau,(niveau)=>niveau.postulants)
+  niveau: Niveau
+
+  @ManyToOne(()=>Langue,(langue)=>langue.postulants)
+  langue:Langue
 }

@@ -1,3 +1,5 @@
+import { LangueModule } from './resources/langue/langue.module'
+import { NiveauModule } from './resources/niveau/niveau.module'
 import { CompetenceModule } from './resources/competence/competence.module'
 import { PostulantModule } from './resources/postulant/postulant.module'
 import Bugsnag from '@bugsnag/js'
@@ -29,6 +31,8 @@ if (process.env.ENABLE_BUGSNAG === 'true') {
     TypeOrmModule.forRoot(appConnectionOptions),
     PostulantModule,
 CompetenceModule,
+NiveauModule,
+LangueModule,
 CaseCoreModule.forRoot({
       userEntity: UserLite,
       notificationEntity: Notification,

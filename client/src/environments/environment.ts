@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   envName: 'development',
-  appName: 'My CASE App',
+  appName: 'Multivers',
   baseUrl: 'http://localhost:4200',
   apiBaseUrl: 'http://localhost:3000',
   storagePath: 'http://localhost:3000/storage',
@@ -13,7 +13,7 @@ export const environment = {
   tokenAllowedDomains: ['localhost:3000'],
   enableBugsnag: false,
   bugsnagApiKey: 'Insert API Key Here',
-  isOnboarding: true
+  isOnboarding: false
 }
 
 /*

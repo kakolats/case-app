@@ -5,6 +5,11 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 import { CaseCreateEditComponent, ResourceDefinition, Field, InputType, BreadcrumbService, FlashMessageService, ResourceService, caseCreateEditTemplate } from '@casejs/angular-library'
 import { postulantDefinition } from '../../resources/postulant/postulant.definition';
 import { environment } from 'src/environments/environment';
+import { Option } from 'src/app/models/option';
+import { CompetenceService } from 'src/app/services/competence.service';
+import { Sexe } from 'src/app/resources/postulant/postulant-create-edit/postulant-create-edit.component';
+import { LangueService } from 'src/app/services/langue.service';
+import { NiveauService } from 'src/app/services/niveau.service';
 
 
 @Component({
@@ -13,18 +18,24 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./candidature.component.scss']
 })
 export class CandidatureComponent extends CaseCreateEditComponent implements OnInit {
+  items: {
+    label:string,
+    value:number
+  };
+  competences:Option[]|[]=[];
+  redirectTo: string = '/forgot-password';
   isOnboarding = environment.isOnboarding
   val:FormGroup = new FormGroup({})
   definition: ResourceDefinition = postulantDefinition
   fields: Field[] = [
     {
-      label: 'Nom',
+      label: 'nom',
       property: 'name',
       required: true,
       inputType: InputType.Text
     },
     {
-      label: 'Prenom',
+      label: 'prenom',
       property: 'prenom',
       required: true,
       inputType: InputType.Text
@@ -33,7 +44,7 @@ export class CandidatureComponent extends CaseCreateEditComponent implements OnI
       label: 'Age',
       property: 'age',
       required: true,
-      inputType: InputType.Number
+      inputType: InputType.Number,
     },
     {
       label: 'Sexe',
@@ -42,11 +53,11 @@ export class CandidatureComponent extends CaseCreateEditComponent implements OnI
       selectOptions: [
         {
           label : 'Masculin',
-          value : 'Masculin'
+          value : Sexe.Homme
         },
         {
           label : 'Feminin',
-          value : 'Feminin'
+          value : Sexe.Femme
         }
       ],
       inputType: InputType.Radio
@@ -70,24 +81,38 @@ export class CandidatureComponent extends CaseCreateEditComponent implements OnI
       inputType: InputType.Text
     },
     {
+      label: 'Competences',
+      property: 'competenceIds',
+      required: false,
+      selectOptions: [ 
+      ],
+      inputType: InputType.MultiSelect
+    },
+    {
+      label: 'Niveau Fullstack',
+      property: 'niveauId',
+      required: true,
+      retrievedItemProperties:{
+        niveauId: 'niveauId'
+      },
+      selectOptions:[],
+      inputType: InputType.Select
+    },
+    {
+      label: 'Langue parlée',
+      property: 'langueId',
+      required: true,
+      retrievedItemProperties:{
+        niveauId: 'langueId'
+      },
+      selectOptions:[],
+      inputType: InputType.Select
+    },
+    {
       label: 'Github',
       property: 'github',
       required: false,
       inputType: InputType.Text
-    },
-    {
-      label: 'Compétences',
-      property: 'competences',
-      selectOptions: [{
-        label: 'Label 1',
-        value: 'Value 1',
-      }, {
-        label: 'Label 2',
-        value: 'Value 2'
-      }
-      ],
-      required: true,
-      inputType: InputType.MultiSelect
     },
     {
       label: 'Photo',
@@ -101,7 +126,6 @@ export class CandidatureComponent extends CaseCreateEditComponent implements OnI
       required: false,
       inputType: InputType.File
     },
-    
   ]
 
   constructor(
@@ -110,7 +134,11 @@ export class CandidatureComponent extends CaseCreateEditComponent implements OnI
     activatedRoute: ActivatedRoute,
     resourceService: ResourceService,
     breadcrumbService: BreadcrumbService,
-    flashMessageService: FlashMessageService
+    flashMessageService: FlashMessageService,
+    private competenceService:CompetenceService,
+    private niveauService:NiveauService,
+    private langueService:LangueService,
+    private routerS:Router
   ) {
     super(
       formBuilder,
@@ -119,23 +147,20 @@ export class CandidatureComponent extends CaseCreateEditComponent implements OnI
       resourceService,
       flashMessageService,
       activatedRoute,
+      
     )
   }
 
   ngOnInit() {
-    this.initCreateEditView().then((data)=>{
-      //console.log(data)
-      this.val=data
-      data.valueChanges.subscribe((dat)=>{
-        console.log(dat)
-        if(data.valid){
-          console.log("Zehahahha")
-        }
-      })
+    this.competenceService.getSelectOptions().subscribe(data=>{
+      this.fields[7].selectOptions=data;
     })
-    console.log(this.fields[3])
-    /* this.submitSuccessful.subscribe(()=>{
-      console.log('Done');
-    }) */
+    this.niveauService.getSelectOptions().subscribe(data=>{
+      this.fields[8].selectOptions=data;
+    })
+    this.langueService.getSelectOptions().subscribe(data=>{
+      this.fields[9].selectOptions=data;
+    })
+    this.initCreateEditView()
   }
 }

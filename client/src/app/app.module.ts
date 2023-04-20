@@ -18,10 +18,17 @@ import { PostulantCreateEditComponent } from './resources/postulant/postulant-cr
 import { PostulantListComponent } from './resources/postulant/postulant-list/postulant-list.component';
 import { PostulantDetailComponent } from './resources/postulant/postulant-detail/postulant-detail.component';
 import { CandidatureComponent } from './pages/candidature/candidature.component';
-import { DefaultLayoutComponent } from './default-layout/default-layout.component';
+import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { CompetenceCreateEditComponent } from './resources/competence/competence-create-edit/competence-create-edit.component';
 import { CompetenceListComponent } from './resources/competence/competence-list/competence-list.component';
-import { CompetenceDetailComponent } from './resources/competence/competence-detail/competence-detail.component'
+import { CompetenceDetailComponent } from './resources/competence/competence-detail/competence-detail.component';
+import { NiveauCreateEditComponent } from './resources/niveau/niveau-create-edit/niveau-create-edit.component';
+import { NiveauListComponent } from './resources/niveau/niveau-list/niveau-list.component';
+import { NiveauDetailComponent } from './resources/niveau/niveau-detail/niveau-detail.component';
+import { LangueCreateEditComponent } from './resources/langue/langue-create-edit/langue-create-edit.component';
+import { LangueListComponent } from './resources/langue/langue-list/langue-list.component';
+import { LangueDetailComponent } from './resources/langue/langue-detail/langue-detail.component';
+import { ThanksComponent } from './pages/thanks/thanks.component'
 
 
 if (environment.enableBugsnag) {
@@ -46,10 +53,17 @@ export function errorHandlerFactory() {
     PostulantListComponent,
     PostulantDetailComponent,
     CandidatureComponent,
-    DefaultLayoutComponent,
+    AdminLayoutComponent,
     CompetenceCreateEditComponent,
     CompetenceListComponent,
-    CompetenceDetailComponent
+    CompetenceDetailComponent,
+    NiveauCreateEditComponent,
+    NiveauListComponent,
+    NiveauDetailComponent,
+    LangueCreateEditComponent,
+    LangueListComponent,
+    LangueDetailComponent,
+    ThanksComponent
   ],
   imports: [
     BrowserModule,

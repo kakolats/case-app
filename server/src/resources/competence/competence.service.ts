@@ -21,7 +21,7 @@ constructor(
     orderBy,
     orderByDesc,
     toXLS,
-    withoutPagination
+    withoutPagination,
   }: {
     competenceIds?: string[]
     page?: string

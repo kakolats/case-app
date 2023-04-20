@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator'
+import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator'
 import { Competence } from 'resources/competence/competence.entity'
 
 export class CreateUpdatePostulantDto {
@@ -12,7 +12,21 @@ export class CreateUpdatePostulantDto {
   @IsString()
   prenom: string
 
+  @IsArray()
+  @IsOptional()
+  competenceIds: string[]
+
   @IsNotEmpty()
+  readonly niveauId:number|string
+
+  @IsNotEmpty()
+  readonly langueId:number|string
+
+  @IsOptional()
   @IsString()
-  competences: Competence[]
+  readonly photo:string
+
+  @IsOptional()
+  @IsString()
+  readonly cv:string
 }

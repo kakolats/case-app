@@ -9,15 +9,15 @@ import {
   User,
   ViewportService
 } from '@casejs/angular-library'
-import { environment } from '../../environments/environment'
+import { environment } from '../../../environments/environment'
 
-import { menuItems } from '../menu-items'
+import { menuItems } from '../../menu-items'
 @Component({
-  selector: 'app-default-layout',
-  templateUrl: './default-layout.component.html',
-  styleUrls: ['./default-layout.component.scss']
+  selector: 'app-admin-layout',
+  templateUrl: './admin-layout.component.html',
+  styleUrls: ['./admin-layout.component.scss']
 })
-export class DefaultLayoutComponent implements OnInit {
+export class AdminLayoutComponent implements OnInit {
   isLogin = true
   isTouchResolution: boolean
   isCollapsed = false

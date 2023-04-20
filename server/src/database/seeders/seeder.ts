@@ -1,3 +1,5 @@
+import { LangueSeeder } from './langue.seeder'
+import { NiveauSeeder } from './niveau.seeder'
 import { CompetenceSeeder } from './competence.seeder'
 import { PostulantSeeder } from './postulant.seeder'
 import 'dotenv/config'
@@ -14,6 +16,10 @@ seed()
 
 async function seed() {
   // * Resource counts (keep comment for schematics).
+
+const langueCount = 40
+
+const niveauCount = 40
 
 const competenceCount = 40
 
@@ -38,6 +44,10 @@ const postulantCount = 40
 
   const deleteTablePromises: Promise<void>[] = [
     // * Table names (keep comment for schematics).
+  'langues',
+
+  'niveaus',
+
   'competences',
 
   'postulants',
@@ -64,6 +74,8 @@ const postulantCount = 40
 
   await (new PostulantSeeder(dataSource, postulantCount)).seed()
   await (new CompetenceSeeder(dataSource, competenceCount)).seed()
+  await (new NiveauSeeder(dataSource, niveauCount)).seed()
+  await (new LangueSeeder(dataSource, langueCount)).seed()
   await dataSource.destroy()
 
   console.log(

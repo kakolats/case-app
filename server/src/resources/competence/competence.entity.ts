@@ -1,9 +1,11 @@
 import { CaseProperty } from '@casejs/nest-library'
 import { faker } from '@faker-js/faker'
+import { Postulant } from 'resources/postulant/postulant.entity'
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm'
@@ -27,4 +29,7 @@ export class Competence {
     seed: (index: number) => faker.random.word()
   })
   libelle: string
+
+  @ManyToMany(()=>Postulant)
+  postulants:Postulant[]
 }

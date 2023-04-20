@@ -27,7 +27,7 @@ export class UserListComponent extends CaseListComponent implements OnInit {
   yields: Yield[] = userYields
   filters: Filter[] = [
     {
-      label: 'Search users',
+      label: 'Recherche utilisateur',
       inputType: InputType.MultiSearch,
       searchResources: [userDefinition],
       properties: {

@@ -26,11 +26,14 @@ export class PostulantController {
   @Permission('browsePostulants')
   async index(
     @Query('postulantIds') postulantIds?: string[],
+    @Query('competenceId') competenceId?: string,
     @Query('page') page?: string,
     @Query('orderBy') orderBy?: string,
     @Query('orderByDesc', ParseBoolPipe) orderByDesc?: boolean,
     @Query('withoutPagination', ParseBoolPipe) withoutPagination?: boolean,
-    @Query('toXLS', ParseBoolPipe) toXLS?: boolean
+    @Query('toXLS', ParseBoolPipe) toXLS?: boolean,
+    @Query('niveauId') niveauId?:string,
+    @Query('langueId') langueId?:string,
   ): Promise<Paginator<Postulant> | Postulant[] | string> {
     return this.postulantService.index({
       postulantIds,
@@ -38,7 +41,10 @@ export class PostulantController {
       orderBy,
       orderByDesc,
       withoutPagination,
-      toXLS
+      toXLS,
+      niveauId,
+      langueId,
+      competenceId
     })
   }
 
@@ -51,7 +57,7 @@ export class PostulantController {
     const postulants: Postulant[] = (await this.postulantService.index({
       withoutPagination: true,
       orderBy,
-      orderByDesc
+      orderByDesc,
     })) as Postulant[]
 
     return postulants.map((postulant: Postulant) => ({
@@ -71,7 +77,8 @@ export class PostulantController {
   async store(
     @Body() postulantDto: CreateUpdatePostulantDto
   ): Promise<Postulant> {
-    return await this.postulantService.store(postulantDto)
+    const postulant:Postulant  = await this.postulantService.store(postulantDto)
+    return postulant
   }
 
   @Put('/:id')

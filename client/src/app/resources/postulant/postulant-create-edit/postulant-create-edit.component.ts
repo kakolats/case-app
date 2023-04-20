@@ -9,6 +9,8 @@ import { postulantDefinition } from '../postulant.definition'
 import { CompetenceService } from 'src/app/services/competence.service'
 import { Competence } from 'src/app/models/competence'
 import { Option } from 'src/app/models/option'
+import { NiveauService } from 'src/app/services/niveau.service'
+import { LangueService } from 'src/app/services/langue.service'
 
 
 export enum Sexe {
@@ -82,12 +84,31 @@ export class PostulantCreateEditComponent extends CaseCreateEditComponent implem
     },
     {
       label: 'Competences',
-      property: 'competences',
+      property: 'competenceIds',
       required: false,
-      selectOptions: [
-        
+      selectOptions: [ 
       ],
       inputType: InputType.MultiSelect
+    },
+    {
+      label: 'Niveau Fullstack',
+      property: 'niveauId',
+      required: true,
+      retrievedItemProperties:{
+        niveauId: 'niveauId'
+      },
+      selectOptions:[],
+      inputType: InputType.Select
+    },
+    {
+      label: 'Langue parlée',
+      property: 'langueId',
+      required: true,
+      retrievedItemProperties:{
+        niveauId: 'langueId'
+      },
+      selectOptions:[],
+      inputType: InputType.Select
     },
     {
       label: 'Github',
@@ -116,7 +137,9 @@ export class PostulantCreateEditComponent extends CaseCreateEditComponent implem
     resourceService: ResourceService,
     breadcrumbService: BreadcrumbService,
     flashMessageService: FlashMessageService,
-    private competenceService:CompetenceService
+    private competenceService:CompetenceService,
+    private niveauService:NiveauService,
+    private langueService:LangueService
   ) {
     super(
       formBuilder,
@@ -146,9 +169,13 @@ export class PostulantCreateEditComponent extends CaseCreateEditComponent implem
       )
     }) */
     this.competenceService.getSelectOptions().subscribe(data=>{
-      console.log(data);
       this.fields[7].selectOptions=data;
-      console.log(this.fields);
+    })
+    this.niveauService.getSelectOptions().subscribe(data=>{
+      this.fields[8].selectOptions=data;
+    })
+    this.langueService.getSelectOptions().subscribe(data=>{
+      this.fields[9].selectOptions=data;
     })
     this.initCreateEditView()
     /* .then((data)=>{

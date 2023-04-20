@@ -16,17 +16,7 @@ export const postulantDefinition: ResourceDefinition = {
   childrenThatPreventDelete: [],
   dropdownLinks: [
     {
-      label: 'Edit',
-      permission: 'editPostulants',
-      action: (postulant) => ({
-        type: ActionType.Link,
-        link: {
-          path: `${postulantDefinition.path}/${postulant.id}/edit`
-        }
-      })
-    },
-    {
-      label: 'Delete',
+      label: 'Supprimer',
       permission: 'deletePostulants',
       action: (postulant) => ({
         type: ActionType.Delete,

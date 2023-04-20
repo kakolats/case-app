@@ -1,3 +1,5 @@
+import { Langue } from './../resources/langue/langue.entity'
+import { Niveau } from './../resources/niveau/niveau.entity'
 import { Competence } from './../resources/competence/competence.entity'
 import { Postulant } from './../resources/postulant/postulant.entity'
 import { SearchResult } from '@casejs/nest-library'
@@ -31,6 +33,22 @@ export class SearchService {
     }
 
     // * Search resources (keep comment for schematics).
+if (
+        resources.includes(Langue.name) &&
+        Langue.searchableFields &&
+        Langue.searchableFields.length
+      ) {
+        const langues: SearchResult[] = await this.searchResource(Langue, terms)
+        searchResults = [...searchResults, ...langues]
+      }
+if (
+        resources.includes(Niveau.name) &&
+        Niveau.searchableFields &&
+        Niveau.searchableFields.length
+      ) {
+        const niveaus: SearchResult[] = await this.searchResource(Niveau, terms)
+        searchResults = [...searchResults, ...niveaus]
+      }
 if (
         resources.includes(Competence.name) &&
         Competence.searchableFields &&
@@ -75,6 +93,20 @@ if (
     let searchResults: SearchResult[] = []
 
     // * Get search result objects (keep comment for schematics).
+if (query.langueIds && query.langueIds.length || query.langueId) {
+        const langues: SearchResult[] = await this.getSearchResultObjectsForResource(
+          Langue,
+          query.langueIds || query.langueId
+        )
+        searchResults = [...searchResults, ...langues]
+      }
+if (query.niveauIds && query.niveauIds.length || query.niveauId) {
+        const niveaus: SearchResult[] = await this.getSearchResultObjectsForResource(
+          Niveau,
+          query.niveauIds || query.niveauId
+        )
+        searchResults = [...searchResults, ...niveaus]
+      }
 if (query.competenceIds && query.competenceIds.length || query.competenceId) {
         const competences: SearchResult[] = await this.getSearchResultObjectsForResource(
           Competence,

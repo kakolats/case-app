@@ -9,6 +9,7 @@ import {
 } from '@casejs/angular-library'
 
 import { postulantDefinition } from '../postulant.definition'
+import { environment } from 'src/environments/environment'
 
 @Component({ 
   templateUrl: './postulant-detail.component.html',
@@ -16,7 +17,7 @@ import { postulantDefinition } from '../postulant.definition'
  })
 export class PostulantDetailComponent extends CaseDetailComponent implements OnInit {
   definition: ResourceDefinition = postulantDefinition
-
+  imageBase:string = environment.storagePath
   constructor(
     breadcrumbService: BreadcrumbService,
     resourceService: ResourceService,

@@ -30,7 +30,7 @@ export class CompetenceController {
     @Query('orderBy') orderBy?: string,
     @Query('orderByDesc', ParseBoolPipe) orderByDesc?: boolean,
     @Query('withoutPagination', ParseBoolPipe) withoutPagination?: boolean,
-    @Query('toXLS', ParseBoolPipe) toXLS?: boolean
+    @Query('toXLS', ParseBoolPipe) toXLS?: boolean,
   ): Promise<Paginator<Competence> | Competence[] | string> {
     return this.competenceService.index({
       competenceIds,
@@ -43,7 +43,6 @@ export class CompetenceController {
   }
 
   @Get('select-options')
-  @UseGuards(AuthGuard)
   async listSelectOptions(
     @Query('orderBy') orderBy?: string,
     @Query('orderByDesc', ParseBoolPipe) orderByDesc?: boolean
@@ -56,7 +55,7 @@ export class CompetenceController {
 
     return competences.map((competence: Competence) => ({
       label: `${competence.libelle}`,
-      value: `${competence.libelle}`
+      value: competence.id
     }))
   }
 
