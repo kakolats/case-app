@@ -19,8 +19,8 @@ export class CompetenceService {
     return this.http.get<Option[]>(`${APIURL}/select-options`);
   }
 
-  getCompetenceByPostulant(postulantId:number):Observable<Option[]>{
-    return this.http.get<Option[]>(`${APIURL}?postulantId=${postulantId}`);
+  getCompetenceByPostulant(postulantId:string):Observable<Competence[]>{
+    return this.http.get<Competence[]>(`${APIURL}?postulantId=${postulantId}&withoutPagination=true`);
   }
 
 }

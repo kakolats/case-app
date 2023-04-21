@@ -83,7 +83,7 @@ export class CandidatureComponent extends CaseCreateEditComponent implements OnI
     {
       label: 'Competences',
       property: 'competenceIds',
-      required: false,
+      required: true,
       selectOptions: [ 
       ],
       inputType: InputType.MultiSelect
@@ -111,19 +111,19 @@ export class CandidatureComponent extends CaseCreateEditComponent implements OnI
     {
       label: 'Github',
       property: 'github',
-      required: false,
+      required: true,
       inputType: InputType.Text
     },
     {
       label: 'Photo',
       property: 'photo',
-      required: false,
+      required: true,
       inputType: InputType.Image
     },
     {
       label: 'Curriculum Vitae',
       property: 'cv',
-      required: false,
+      required: true,
       inputType: InputType.File
     },
   ]

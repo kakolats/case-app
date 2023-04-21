@@ -30,6 +30,6 @@ export class Competence {
   })
   libelle: string
 
-  @ManyToMany(()=>Postulant)
+  @ManyToMany(()=>Postulant,(postulant) => postulant.competences)
   postulants:Postulant[]
 }

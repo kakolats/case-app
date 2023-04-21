@@ -85,7 +85,7 @@ export class PostulantCreateEditComponent extends CaseCreateEditComponent implem
     {
       label: 'Competences',
       property: 'competenceIds',
-      required: false,
+      required: true,
       selectOptions: [ 
       ],
       inputType: InputType.MultiSelect
@@ -113,19 +113,19 @@ export class PostulantCreateEditComponent extends CaseCreateEditComponent implem
     {
       label: 'Github',
       property: 'github',
-      required: false,
+      required: true,
       inputType: InputType.Text
     },
     {
       label: 'Photo',
       property: 'photo',
-      required: false,
+      required: true,
       inputType: InputType.Image
     },
     {
       label: 'Curriculum Vitae',
       property: 'cv',
-      required: false,
+      required: true,
       inputType: InputType.File
     },
   ]

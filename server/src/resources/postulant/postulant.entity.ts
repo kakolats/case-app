@@ -107,7 +107,7 @@ export class Postulant {
   cv: string
 
 
-  @ManyToMany(()=> Competence)
+  @ManyToMany(()=> Competence, (competence)=>competence.postulants)
   @JoinTable()
   competences: Competence[]
 

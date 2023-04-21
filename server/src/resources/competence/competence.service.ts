@@ -22,6 +22,7 @@ constructor(
     orderByDesc,
     toXLS,
     withoutPagination,
+    postulantId
   }: {
     competenceIds?: string[]
     page?: string
@@ -29,12 +30,18 @@ constructor(
     orderByDesc?: boolean
     toXLS?: boolean
     withoutPagination?: boolean
+    postulantId?:string
   }): Promise<Paginator<Competence> | Competence[] | string> {
     const query = this.repository
       .createQueryBuilder('competence')
-
+      .leftJoinAndSelect('competence.postulants','postulant')
+    
     if (competenceIds) {
       query.andWhere('competence.id IN (:competenceIds)', { competenceIds })
+    }
+
+    if(postulantId){
+      query.andWhere('postulant.id = :postulantId',{postulantId})
     }
  
     if (orderBy) {

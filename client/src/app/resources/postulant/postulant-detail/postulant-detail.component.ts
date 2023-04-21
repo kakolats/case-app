@@ -10,6 +10,9 @@ import {
 
 import { postulantDefinition } from '../postulant.definition'
 import { environment } from 'src/environments/environment'
+import { Option } from 'src/app/models/option'
+import { CompetenceService } from 'src/app/services/competence.service'
+import { Competence } from 'src/app/models/competence'
 
 @Component({ 
   templateUrl: './postulant-detail.component.html',
@@ -18,11 +21,13 @@ import { environment } from 'src/environments/environment'
 export class PostulantDetailComponent extends CaseDetailComponent implements OnInit {
   definition: ResourceDefinition = postulantDefinition
   imageBase:string = environment.storagePath
+  competences:Competence[] = []
   constructor(
     breadcrumbService: BreadcrumbService,
     resourceService: ResourceService,
     flashMessageService: FlashMessageService,
     activatedRoute: ActivatedRoute,
+    private competenceService:CompetenceService
   ) {
     super(
       breadcrumbService,
@@ -33,6 +38,14 @@ export class PostulantDetailComponent extends CaseDetailComponent implements OnI
   }
 
   async ngOnInit(): Promise<void> {
-    await this.initDetailView()
+    /* this.competenceService.getCompetenceByPostulant(this.item.id).subscribe(data=>{
+      this.competences = data
+      console.log(data)
+    }) */
+    await this.initDetailView().then(()=>{
+      this.competenceService.getCompetenceByPostulant(this.item.id).subscribe(data=>{
+        this.competences = data
+      })
+    })
   }
 }

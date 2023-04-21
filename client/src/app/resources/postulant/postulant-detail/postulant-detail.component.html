@@ -37,4 +37,25 @@
       </div>
     </div>
   </div>
+  <div class="content is-large">
+    <h3>Competences du postulant</h3>
+    <ng-container *ngIf="competences.length>0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th><abbr title="Id">Id</abbr></th>
+            <th>Libelle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let comp of competences">
+            <td>{{ comp.id }}</td>
+            <td>{{ comp.libelle }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+  </div>
+  
+  
 </ng-container>

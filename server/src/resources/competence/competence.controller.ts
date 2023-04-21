@@ -1,3 +1,4 @@
+
 import {
   Body,
   Controller,
@@ -31,6 +32,7 @@ export class CompetenceController {
     @Query('orderByDesc', ParseBoolPipe) orderByDesc?: boolean,
     @Query('withoutPagination', ParseBoolPipe) withoutPagination?: boolean,
     @Query('toXLS', ParseBoolPipe) toXLS?: boolean,
+    @Query('postulantId') postulantId?:string
   ): Promise<Paginator<Competence> | Competence[] | string> {
     return this.competenceService.index({
       competenceIds,
@@ -38,7 +40,8 @@ export class CompetenceController {
       orderBy,
       orderByDesc,
       withoutPagination,
-      toXLS
+      toXLS,
+      postulantId
     })
   }
 
